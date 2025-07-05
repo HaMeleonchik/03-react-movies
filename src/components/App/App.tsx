@@ -15,8 +15,6 @@ export default function App() {
   const [isErrorMessage, setErrorMessage] = useState(false)
   const [isSelectedMovie, setSelectedMovie] = useState<Movie | null>(null)
   async function handleSearch(searchQuery: string) {
-console.log(isSelectedMovie);
-
     try {
       setMovie([]);
       setLoading(true)
@@ -42,7 +40,6 @@ console.log(isSelectedMovie);
     <Loader isLoading={isLoading} />
     <ErrorMessage isErrorMessage={isErrorMessage}/>
     <MovieGrid movies={Movie} onSelect={setSelectedMovie} />
-    {}
     {isSelectedMovie && <MovieModal movie={isSelectedMovie} onClose={()=>setSelectedMovie(null) } />}
   </>
 }
