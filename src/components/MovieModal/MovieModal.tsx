@@ -9,6 +9,9 @@ interface MovieModalProps{
 export default function MovieModal({ movie, onClose }: MovieModalProps) {
   // handleBackdropClick
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+
+    if (!movie) return null
+    
     if(event.target === event.currentTarget) {
       onClose()
     }
@@ -34,7 +37,7 @@ return createPortal(<div className={css.backdrop} role="dialog" aria-modal="true
     &times;
   </button>
   <img
-    src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
+    src={`https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`}
     alt="movie_title"
     className={css.image}
   />
