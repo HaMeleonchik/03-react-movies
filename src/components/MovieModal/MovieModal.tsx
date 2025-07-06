@@ -7,15 +7,7 @@ interface MovieModalProps{
   onClose: () => void
 }
 export default function MovieModal({ movie, onClose }: MovieModalProps) {
-  // handleBackdropClick
-  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
 
-    if (!movie) return null
-    
-    if(event.target === event.currentTarget) {
-      onClose()
-    }
-  }
   // Escape and fix
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -29,7 +21,17 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
       document.removeEventListener("keydown", handleKeyDown)
       document.body.style.overflow = ""
     }
-}, [onClose])
+  }, [onClose])
+  
+  if (!movie) return null;
+
+  // handleBackdropClick
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if(event.target === event.currentTarget) {
+      onClose()
+    }
+  }
+
 
 return createPortal(<div className={css.backdrop} role="dialog" aria-modal="true" onClick={handleBackdropClick}>
 <div className={css.modal}>
@@ -37,18 +39,18 @@ return createPortal(<div className={css.backdrop} role="dialog" aria-modal="true
     &times;
   </button>
   <img
-    src={`https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`}
-    alt="movie_title"
+    src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+    alt={movie.title}
     className={css.image}
   />
   <div className={css.content}>
-    <h2>{movie?.title}</h2>
-      <p>{movie?.overview}</p>
+    <h2>{movie.title}</h2>
+      <p>{movie.overview}</p>
     <p>
-      <strong>Release Date:</strong> {movie?.release_date}
+      <strong>Release Date:</strong> {movie.release_date}
     </p>
     <p>
-      <strong>Rating:</strong> {movie?.vote_average}
+      <strong>Rating:</strong> {movie.vote_average}
     </p>
   </div>
 </div>
